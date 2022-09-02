@@ -8,6 +8,7 @@
  * @format
  */
 
+import 'react-native-gesture-handler';
 import React, {type PropsWithChildren} from 'react';
 import {
   SafeAreaView,

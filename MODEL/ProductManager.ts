@@ -14,7 +14,7 @@ const removeProduct = async (key: string) => {
 };
 const getProductsJSON = async () => {
   try {
-    let keys: Array<string> = [];
+    let keys: any = [];
     keys = await AsyncStorage.getAllKeys();
     return await AsyncStorage.multiGet(keys);
   } catch (e) {
@@ -26,7 +26,7 @@ const obterProducts = async () => {
     let objects: Array<Product> = [];
     let objJSON = await getProductsJSON();
     if (objJSON != null && objJSON.length > 0) {
-      objJSON.forEach((element: string) => {
+      objJSON.forEach((element: any) => {
         let product: Product = JSON.parse(element[1]);
         objects.push(product);
       });
