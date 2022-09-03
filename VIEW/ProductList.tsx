@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View, FlatList, StatusBar} from 'react-native';
+import {Text, View, FlatList} from 'react-native';
 import Product from '../MODEL/Product';
 import ProductManager from '../MODEL/ProductManager';
+import {styles} from './CommonStyles';
 
 // const defaultData = [
 //   {
@@ -67,21 +68,5 @@ const ProductComponent = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
-  },
-  item: {
-    backgroundColor: 'yellow',
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-  title: {
-    fontSize: 12,
-  },
-});
 
 export default ProductComponent;

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Text, View, TextInput, TouchableOpacity} from 'react-native';
-import {Product} from './MODEL/Product';
-import ProductManager from './MODEL/ProductManager';
+import {Product} from '../MODEL/Product';
+import ProductManager from '../MODEL/ProductManager';
 import {styles} from './CommonStyles';
 
 export default function ProductForm({navigation}) {
