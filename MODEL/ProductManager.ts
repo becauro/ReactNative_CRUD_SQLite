@@ -1,7 +1,13 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Product} from './Product';
+// import Product from './Product';
 
-const salveProduct = async (key: string, value: any) => {
+type ProductType = {
+  Code: number;
+  Name: String;
+  Quantity: Number;
+};
+
+const salveProduct = async (key: string, value: ProductType) => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem(key, jsonValue);
@@ -12,22 +18,23 @@ const removeProduct = async (key: string) => {
     await AsyncStorage.removeItem(key);
   } catch (e) {}
 };
+// const getProductsJSON = async (): Promise<Array<string>> => {
 const getProductsJSON = async () => {
   try {
-    let keys: any = [];
-    keys = await AsyncStorage.getAllKeys();
+    // let keys: any = [];
+    let keys = await AsyncStorage.getAllKeys();
     return await AsyncStorage.multiGet(keys);
   } catch (e) {
     return [];
   }
 };
-const obterProducts = async () => {
+const getProducts = async () => {
   try {
-    let objects: Array<Product> = [];
+    let objects: Array<ProductType> = [];
     let objJSON = await getProductsJSON();
     if (objJSON != null && objJSON.length > 0) {
       objJSON.forEach((element: any) => {
-        let product: Product = JSON.parse(element[1]);
+        let product: ProductType = JSON.parse(element[1]);
         objects.push(product);
       });
     }
@@ -41,11 +48,11 @@ class ProductManager {
   public async remove(chave: number) {
     removeProduct(chave.toString());
   }
-  public async add(product: Product) {
+  public async add(product: ProductType) {
     salveProduct(product.Code.toString(), product);
   }
-  public async getAll(): Promise<Array<Product>> {
-    let lista: Array<Product> = await obterProducts();
+  public async getAll(): Promise<Array<ProductType>> {
+    let lista: Array<ProductType> = await getProducts();
     return lista;
   }
 }

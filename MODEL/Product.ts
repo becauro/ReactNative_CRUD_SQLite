@@ -1,20 +1,13 @@
-export class Product {
+class Product {
   Code: number;
-  Name: String;
-  Quantity: Number;
+  Name: string;
+  Quantity: number;
 
-  // constructor(Code: number, Name: String, Quantity: Number);
-
-  //  constructor(Code = 0, Name = "", Quantity: 0) {
-  //   this.Code = Code,
-  //   this.Name= Name,
-  //   this.Quantity = Quantity,
-  // }
-
-  constructor(Code: number, Name: String, Quantity: Number) {
-    this.Code = Code,
-    this.Name= Name,
-    this.Quantity = Quantity,
+  constructor(code: number, name: string, quantity: number) {
+    this.Code = code;
+    this.Name = name;
+    this.Quantity = quantity;
   }
-
 }
+
+export default Product;
