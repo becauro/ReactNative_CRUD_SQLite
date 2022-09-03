@@ -12,7 +12,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen name="ProductForm" component={ProductForm} /> */}
+        <Stack.Screen name="ProductForm" component={ProductForm} />
         <Stack.Screen name="ProductList" component={ProductList_Screen} />
       </Stack.Navigator>
     </NavigationContainer>
