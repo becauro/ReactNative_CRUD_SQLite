@@ -32,6 +32,7 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 12,
+    margin: 5,
   },
   buttonTextBig: {
     fontSize: 18,

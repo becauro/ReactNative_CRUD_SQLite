@@ -10,6 +10,10 @@ export default function ProductForm({navigation}) {
   const [name, setName] = useState('');
   const [quantity, setQuantity] = useState('');
 
+  const goToList = () => {
+    navigation.navigate('ProductList');
+  };
+
   const checkFieldEmpty = () => {
     let error = false;
 
@@ -71,6 +75,9 @@ export default function ProductForm({navigation}) {
       />
       <TouchableOpacity style={styles.button} onPress={save}>
         <Text style={styles.buttonTextBig}>Save</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={goToList}>
+        <Text style={styles.buttonTextBig}>List</Text>
       </TouchableOpacity>
     </View>
   );
