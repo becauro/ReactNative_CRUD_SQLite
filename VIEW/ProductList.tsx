@@ -5,8 +5,9 @@ import {styles} from './CommonStyles';
 
 /*
 ToDos:
- - Remove option button in each Product
- - UPDATE product
+ - Add Remove (x) button in each Product
+    - After click in X button, a modal pop up to confirm
+ - UPDATE product navigate to Update Screen, not to ProductForm screen
  - Show modal with Product details
 */
 
@@ -16,15 +17,22 @@ type ProductType = {
   Quantity: Number;
 };
 
-const renderItem = ({item}: any) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{item.Name}</Text>
-  </View>
-);
-
-const ProductComponent = () => {
+export default function ProductList({navigation}: any) {
   const manager: ProductManager = new ProductManager();
   const [DATA, setDATA] = useState(Array<ProductType>);
+
+  const updateData = (prodData: ProductType) => {
+    navigation.navigate('ProductForm', {prodData});
+  };
+
+  const renderItem = ({item}: any) => (
+    <View style={styles.item}>
+      <Text style={styles.title}>{item.Name}</Text>
+      <Text style={styles.itemUpdateBtn} onPress={() => updateData(item)}>
+        Update
+      </Text>
+    </View>
+  );
 
   const loadAllData = async () => {
     let newData: Array<ProductType> = await manager.getAll();
@@ -51,6 +59,4 @@ const ProductComponent = () => {
       </TouchableOpacity>
     </View>
   );
-};
-
-export default ProductComponent;
+}

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Alert, Text, View, TextInput, TouchableOpacity} from 'react-native';
 import Product from '../MODEL/Product';
 import ProductManager from '../MODEL/ProductManager';
@@ -8,12 +8,32 @@ import {styles} from './CommonStyles';
 ToDos:
 
  - Check duplicate code before register it
+ - Duplicate this screen for Update screen
+    - If not, this screen data overwrite the data
 */
-export default function ProductForm({navigation}) {
+export default function ProductForm({route, navigation}) {
   const manager = new ProductManager();
   const [code, setCode] = useState('');
   const [name, setName] = useState('');
   const [quantity, setQuantity] = useState('');
+
+  const checkAndLoadData = () => {
+    if (route.params !== undefined) {
+      const {Code, Name, Quantity} = route.params.prodData;
+      setCode(Code.toString());
+      setName(Name.toString());
+      setQuantity(Quantity.toString());
+
+      route.params = undefined;
+    }
+  };
+
+  useEffect(() => {
+    console.log('AQUI O route.params.Code in ProductForm:');
+    console.log(route.params);
+
+    checkAndLoadData();
+  });
 
   const clearFields = () => {
     setCode('');

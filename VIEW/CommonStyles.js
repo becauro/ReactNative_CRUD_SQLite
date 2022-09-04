@@ -6,6 +6,8 @@ export const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight || 0,
   },
   item: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     backgroundColor: 'yellow',
     padding: 20,
     marginVertical: 8,
@@ -13,6 +15,10 @@ export const styles = StyleSheet.create({
   },
   title: {
     fontSize: 12,
+  },
+  itemUpdateBtn: {
+    backgroundColor: 'blue',
+    color: 'red',
   },
   inputContainer: {
     flex: 1,
