@@ -18,7 +18,19 @@ const removeProduct = async (key: string) => {
     await AsyncStorage.removeItem(key);
   } catch (e) {}
 };
-// const getProductsJSON = async (): Promise<Array<string>> => {
+
+const removeAllProducts = async () => {
+  try {
+    let keys = await AsyncStorage.getAllKeys();
+
+    keys.forEach(async (key: string) => {
+      await AsyncStorage.removeItem(key);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const getProductsJSON = async () => {
   try {
     // let keys: any = [];
@@ -48,6 +60,11 @@ class ProductManager {
   public async remove(chave: number) {
     removeProduct(chave.toString());
   }
+
+  public async removeAll() {
+    removeAllProducts();
+  }
+
   public async add(product: ProductType) {
     salveProduct(product.Code.toString(), product);
   }
