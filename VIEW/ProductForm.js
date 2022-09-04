@@ -10,6 +10,12 @@ export default function ProductForm({navigation}) {
   const [name, setName] = useState('');
   const [quantity, setQuantity] = useState('');
 
+  const clearFields = () => {
+    setCode('');
+    setName('');
+    setQuantity('');
+  };
+
   const goToList = () => {
     navigation.navigate('ProductList');
   };
@@ -73,6 +79,9 @@ export default function ProductForm({navigation}) {
         value={quantity}
         onChangeText={setQuantity}
       />
+      <TouchableOpacity style={styles.button} onPress={clearFields}>
+        <Text style={styles.buttonTextBig}>Clear</Text>
+      </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={save}>
         <Text style={styles.buttonTextBig}>Save</Text>
       </TouchableOpacity>
