@@ -4,6 +4,11 @@ import Product from '../MODEL/Product';
 import ProductManager from '../MODEL/ProductManager';
 import {styles} from './CommonStyles';
 
+/*
+ToDos:
+
+ - Check duplicate code before register it
+*/
 export default function ProductForm({navigation}) {
   const manager = new ProductManager();
   const [code, setCode] = useState('');

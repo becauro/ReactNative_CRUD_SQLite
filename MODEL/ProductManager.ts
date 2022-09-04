@@ -1,5 +1,4 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// import Product from './Product';
 
 type ProductType = {
   Code: number;
@@ -33,7 +32,6 @@ const removeAllProducts = async () => {
 
 const getProductsJSON = async () => {
   try {
-    // let keys: any = [];
     let keys = await AsyncStorage.getAllKeys();
     return await AsyncStorage.multiGet(keys);
   } catch (e) {
@@ -58,15 +56,15 @@ const getProducts = async () => {
 
 class ProductManager {
   public async remove(chave: number) {
-    removeProduct(chave.toString());
+    await removeProduct(chave.toString());
   }
 
   public async removeAll() {
-    removeAllProducts();
+    await removeAllProducts();
   }
 
   public async add(product: ProductType) {
-    salveProduct(product.Code.toString(), product);
+    await salveProduct(product.Code.toString(), product);
   }
   public async getAll(): Promise<Array<ProductType>> {
     let lista: Array<ProductType> = await getProducts();
