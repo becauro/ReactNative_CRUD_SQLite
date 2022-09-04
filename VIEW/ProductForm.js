@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, View, TextInput, TouchableOpacity} from 'react-native';
+import {Alert, Text, View, TextInput, TouchableOpacity} from 'react-native';
 import Product from '../MODEL/Product';
 import ProductManager from '../MODEL/ProductManager';
 import {styles} from './CommonStyles';
@@ -9,14 +9,36 @@ export default function ProductForm({navigation}) {
   const [code, setCode] = useState('');
   const [name, setName] = useState('');
   const [quantity, setQuantity] = useState('');
+
+  const checkFieldEmpty = () => {
+    let error = false;
+
+    if (code === '') {
+      error = true;
+      return Alert.alert('Code field is empty');
+    } else if (name === '') {
+      error = true;
+      return Alert.alert('Name field is empty');
+    } else if (quantity === '') {
+      error = true;
+      return Alert.alert('Quantity field is empty');
+    }
+
+    return error;
+  };
+
   const save = () => {
     try {
-      const prodAux = new Product(
-        parseInt(code, 10),
-        name,
-        parseInt(quantity, 10),
-      );
-      manager.add(prodAux).then(navigation.navigate('ProductList'));
+      const fieldIsEmpty = checkFieldEmpty();
+
+      if (fieldIsEmpty === false) {
+        const prodAux = new Product(
+          parseInt(code, 10),
+          name,
+          parseInt(quantity, 10),
+        );
+        manager.add(prodAux).then(navigation.navigate('ProductList'));
+      }
     } catch (error) {
       console.log(error);
     }
