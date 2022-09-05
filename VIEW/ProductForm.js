@@ -29,9 +29,6 @@ export default function ProductForm({route, navigation}) {
   };
 
   useEffect(() => {
-    console.log('AQUI O route.params.Code in ProductForm:');
-    console.log(route.params);
-
     checkAndLoadData();
   });
 
@@ -108,10 +105,14 @@ export default function ProductForm({route, navigation}) {
         <Text style={styles.buttonTextBig}>Clear</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={save}>
-        <Text style={styles.buttonTextBig}>Save</Text>
+        <Text style={styles.buttonTextBig}>
+          {route.params !== undefined ? 'update' : 'Save'}
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={goToList}>
-        <Text style={styles.buttonTextBig}>List</Text>
+        <Text style={styles.buttonTextBig}>
+          {route.params !== undefined ? 'Cancel' : 'List'}
+        </Text>
       </TouchableOpacity>
     </View>
   );
