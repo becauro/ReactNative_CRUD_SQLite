@@ -4,18 +4,12 @@ import Product from '../MODEL/Product';
 import ProductManager from '../MODEL/ProductManager';
 import {styles} from './CommonStyles';
 
-/*
-ToDos:
-
- - Check duplicate code before register it
- - Duplicate this screen for Update screen
-    - If not, this screen data overwrite the data
-*/
 export default function ProductForm({route, navigation}) {
   const manager = new ProductManager();
   const [code, setCode] = useState('');
   const [name, setName] = useState('');
   const [quantity, setQuantity] = useState('');
+  const [updateMode, setUpdateMode] = useState(false);
 
   const checkAndLoadData = () => {
     if (route.params !== undefined) {
@@ -24,7 +18,9 @@ export default function ProductForm({route, navigation}) {
       setName(Name.toString());
       setQuantity(Quantity.toString());
 
-      route.params = undefined;
+      setUpdateMode(true);
+
+      route.params = undefined; // It's necessary because as long as the fields change, this condition is checked because it is inside useEffect()
     }
   };
 
@@ -39,6 +35,11 @@ export default function ProductForm({route, navigation}) {
   };
 
   const goToList = () => {
+    if (route.params !== undefined) {
+      route.params = undefined;
+    }
+    clearFields();
+    setUpdateMode(false);
     navigation.navigate('ProductList');
   };
 
@@ -59,11 +60,22 @@ export default function ProductForm({route, navigation}) {
     return error;
   };
 
-  const save = () => {
+  const checkIfKeyExists = async () => {
+    const keyExists = await manager.checkIfKeyExists(code);
+
+    if (keyExists === true) {
+      Alert.alert('Code already exist');
+    }
+
+    return keyExists;
+  };
+
+  const save = async () => {
     try {
       const fieldIsEmpty = checkFieldEmpty();
+      const keyExistsCode = await checkIfKeyExists();
 
-      if (fieldIsEmpty === false) {
+      if (fieldIsEmpty === false && keyExistsCode === false) {
         const prodAux = new Product(
           parseInt(code, 10),
           name,
@@ -104,14 +116,16 @@ export default function ProductForm({route, navigation}) {
       <TouchableOpacity style={styles.button} onPress={clearFields}>
         <Text style={styles.buttonTextBig}>Clear</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={save}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={updateMode ? () => Alert.alert('Todo: Update handler') : save}>
         <Text style={styles.buttonTextBig}>
-          {route.params !== undefined ? 'update' : 'Save'}
+          {updateMode ? 'update' : 'Save'}
         </Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={goToList}>
         <Text style={styles.buttonTextBig}>
-          {route.params !== undefined ? 'Cancel' : 'List'}
+          {updateMode ? 'Cancel' : 'List / Cancel'}
         </Text>
       </TouchableOpacity>
     </View>

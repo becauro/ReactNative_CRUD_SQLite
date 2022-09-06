@@ -7,6 +7,12 @@ type ProductType = {
 };
 
 class ProductManager {
+  // HELPER methods
+
+  public async checkIfKeyExists(code: string) {
+    return (await AsyncStorage.getAllKeys()).some(key => key === code);
+  }
+
   public async remove(key: number) {
     try {
       await AsyncStorage.removeItem(key.toString());
