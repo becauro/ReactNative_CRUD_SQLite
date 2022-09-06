@@ -14,7 +14,7 @@ I tried developing a simple Product Registration app, just for practicing basic 
 
 ## Data persistence
 
-The data is persist by use the [AsyncStorage](https://react-native-async-storage.github.io/async-storage/docs/install/) library
+The data persist through the [AsyncStorage](https://react-native-async-storage.github.io/async-storage/docs/install/) library.
 
 
 
