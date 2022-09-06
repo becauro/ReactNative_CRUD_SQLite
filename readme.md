@@ -3,7 +3,7 @@
 This project was developed in React Native and designed only for studies purpose.
 Maybe it's is a work in progress.
 
-For now this app works only in Android platform. I've not set anything for iOS yet, but you can do so if you will ;-)
+For now this app works only in Android platform. I've not set anything for iOS yet, but you can do so if you wish ;-)
 
 
 ## Description
@@ -42,6 +42,12 @@ Both ways require specifics settings inside the Project.
 However I developed it under second way (React Native CLI).
 
 So, in order to be able to build the app, make sure to follow the React Native [documentation](https://reactnative.dev/docs/environment-setup#development-os) step-by-step for React Native CLI mode (Not Expo way) according your Operation System (macOS, Windows or GNU/Linux).
+
+### NOTE about Expo
+
+if youŕe used with Expo, try adapat the project by following [this Expo](https://docs.expo.dev/bare/installing-expo-modules/) documentation and MAYBE [this one ](https://docs.expo.dev/bare/exploring-bare-workflow/) if you wish to use Expo code directly into Android Studio Emulator or Device.
+
+PS: I've not tested it yet. I am just giving you what documentation says!
 
 
 ### NOTE about Install Nodejs
