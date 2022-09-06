@@ -7,10 +7,26 @@ type ProductType = {
 };
 
 class ProductManager {
-  // HELPER methods
+  // HELPER Method:
 
   public async checkIfKeyExists(code: string) {
     return (await AsyncStorage.getAllKeys()).some(key => key === code);
+  }
+
+  // NORMAL Methods:
+
+  public async add(product: ProductType) {
+    try {
+      const jsonValue = JSON.stringify(product);
+      await AsyncStorage.setItem(product.Code.toString(), jsonValue);
+    } catch (e) {}
+  }
+
+  public async update(product: ProductType) {
+    try {
+      const jsonValue = JSON.stringify(product);
+      await AsyncStorage.mergeItem(product.Code.toString(), jsonValue);
+    } catch (e) {}
   }
 
   public async remove(key: number) {
@@ -28,13 +44,6 @@ class ProductManager {
     } catch (error) {
       console.log(error);
     }
-  }
-
-  public async add(product: ProductType) {
-    try {
-      const jsonValue = JSON.stringify(product);
-      await AsyncStorage.setItem(product.Code.toString(), jsonValue);
-    } catch (e) {}
   }
 
   public async getOne(key: number) {
