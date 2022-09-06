@@ -7,7 +7,6 @@ import {styles} from './CommonStyles';
 ToDos:
  - Add Remove (x) button in each Product
     - After click in X button, a modal pop up to confirm
- - UPDATE product navigate to Update Screen, not to ProductForm screen
  - Show modal with Product details
 */
 

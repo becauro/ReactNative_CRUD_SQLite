@@ -11,6 +11,8 @@ For now this app works only in Android platform. I've not set anything for iOS y
 As the title suggest, there is only the CRUD features in this app.
 I tried developing a simple Product Registration app, just for practicing basic concepts in React Native.
 
+Each products have only three data: Code, Name and Quantity.
+
 
 ## Data persistence
 
