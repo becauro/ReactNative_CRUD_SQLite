@@ -6,69 +6,52 @@ type ProductType = {
   Quantity: Number;
 };
 
-const salveProduct = async (key: string, value: ProductType) => {
-  try {
-    const jsonValue = JSON.stringify(value);
-    await AsyncStorage.setItem(key, jsonValue);
-  } catch (e) {}
-};
-const removeProduct = async (key: string) => {
-  try {
-    await AsyncStorage.removeItem(key);
-  } catch (e) {}
-};
-
-const removeAllProducts = async () => {
-  try {
-    let keys = await AsyncStorage.getAllKeys();
-
-    keys.forEach(async (key: string) => {
-      await AsyncStorage.removeItem(key);
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const getProductsJSON = async () => {
-  try {
-    let keys = await AsyncStorage.getAllKeys();
-    return await AsyncStorage.multiGet(keys);
-  } catch (e) {
-    return [];
-  }
-};
-const getProducts = async () => {
-  try {
-    let objects: Array<ProductType> = [];
-    let objJSON = await getProductsJSON();
-    if (objJSON != null && objJSON.length > 0) {
-      objJSON.forEach((element: any) => {
-        let product: ProductType = JSON.parse(element[1]);
-        objects.push(product);
-      });
-    }
-    return objects;
-  } catch (e) {
-    return [];
-  }
-};
-
 class ProductManager {
-  public async remove(chave: number) {
-    await removeProduct(chave.toString());
+  public async remove(key: number) {
+    try {
+      await AsyncStorage.removeItem(key.toString());
+    } catch (e) {}
   }
 
   public async removeAll() {
-    await removeAllProducts();
+    try {
+      let keys = await AsyncStorage.getAllKeys();
+      keys.forEach(async (key: string) => {
+        await AsyncStorage.removeItem(key);
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   public async add(product: ProductType) {
-    await salveProduct(product.Code.toString(), product);
+    try {
+      const jsonValue = JSON.stringify(product);
+      await AsyncStorage.setItem(product.Code.toString(), jsonValue);
+    } catch (e) {}
   }
+
+  public async getOne(key: number) {
+    return await AsyncStorage.getItem(key.toString());
+  }
+
   public async getAll(): Promise<Array<ProductType>> {
-    let lista: Array<ProductType> = await getProducts();
-    return lista;
+    try {
+      let objects: Array<ProductType> = [];
+
+      let keys = await AsyncStorage.getAllKeys();
+      let objJSON = await AsyncStorage.multiGet(keys);
+
+      if (objJSON != null && objJSON.length > 0) {
+        objJSON.forEach((element: any) => {
+          let product: ProductType = JSON.parse(element[1]);
+          objects.push(product);
+        });
+      }
+      return objects;
+    } catch (e) {
+      return [];
+    }
   }
 }
 
