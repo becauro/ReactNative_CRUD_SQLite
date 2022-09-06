@@ -6,7 +6,7 @@ Maybe it's is a work in progress.
 For now this app works only in Android platform. I've not set anything for iOS yet, but you can do so if you will ;-)
 
 
-### Description
+## Description
 
 As the title suggest, there is only the CRUD features in this app.
 I tried developing a simple Product Registration app, just for practicing basic concepts in React Native.
@@ -27,7 +27,7 @@ There is only two simple screens:
 2. The ProductList screen list all registered products.
 There is a Button in the botton to remove ALL products registered.
 
-### How to build the project
+## How to build the project
 
 
 I know only two ways to develop an app in React Native:
