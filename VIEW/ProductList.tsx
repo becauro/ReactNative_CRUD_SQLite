@@ -55,7 +55,7 @@ export default function ProductList({navigation}: any) {
         keyExtractor={item => item.Code.toString()}
       />
       <TouchableOpacity style={styles.button} onPress={removeAllData}>
-        <Text style={styles.buttonTextBig}>Remove products</Text>
+        <Text style={styles.buttonTextBig}>Remove ALL products</Text>
       </TouchableOpacity>
     </View>
   );
