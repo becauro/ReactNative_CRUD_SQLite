@@ -45,7 +45,7 @@ So, in order to be able to build the app, make sure to follow the React Native [
 
 ### NOTE about Expo
 
-if youŕe used with Expo, try adapat the project by following [this Expo](https://docs.expo.dev/bare/installing-expo-modules/) documentation and MAYBE [this one ](https://docs.expo.dev/bare/exploring-bare-workflow/) if you wish to use Expo code directly into Android Studio Emulator or Device.
+If youŕe used with Expo, try adapat the project by following [this Expo](https://docs.expo.dev/bare/installing-expo-modules/) documentation and MAYBE [this one ](https://docs.expo.dev/bare/exploring-bare-workflow/) if you wish to use Expo code directly into Android Studio Emulator or Device.
 
 PS: I've not tested it yet. I am just giving you what documentation says!
 
