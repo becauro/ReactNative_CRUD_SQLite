@@ -60,7 +60,7 @@ Once the development environment get done and the project get cloned, follow the
 1. In command line, go to the project folder
 2. Type: npm install
 3. Once the previous command get finished, open another command line (terminal) and type: npm start
-4. Go back to thre previous terminal and type: npm tun android
+4. Go back to the previous terminal and type: npm run android
 
 
 
