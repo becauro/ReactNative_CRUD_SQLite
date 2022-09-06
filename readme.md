@@ -1,6 +1,6 @@
 # AsyncStorage CRUD
 
-This project was designed only for studies purpose.
+This project was developed in React Native and designed only for studies purpose.
 Maybe it's is a work in progress.
 
 For now this app works only in Android platform. I've not set anything for iOS yet, but you can do so if you will ;-)
@@ -14,7 +14,7 @@ I tried developing a simple Product Registration app, just for practicing basic 
 
 ## Data persistence
 
-The data is persist by use the (AsyncStorage)[https://react-native-async-storage.github.io/async-storage/docs/install/] library
+The data is persist by use the [AsyncStorage](https://react-native-async-storage.github.io/async-storage/docs/install/) library
 
 
 
@@ -22,7 +22,7 @@ The data is persist by use the (AsyncStorage)[https://react-native-async-storage
 
 There is only two simple screens:
 
-1 - The Product Form screen is used for Update and Register a new product. Yes, the form Screen is a Dynamic component.
+1 - The Product Form screen is used for update and register a new product. Yes, the form Screen is a Dynamic component to be able to perform those two tasks.
 
 2 The ProductList screen list all registered products.
 There is a Button in the botton to remove ALL products registered.
@@ -48,8 +48,8 @@ In my opinion the best way to work with Node is by use NVM manager:
 
 This tools allow you install and use node version as quick as install an app from Playsore.
 
-- [NVM](https://github.com/nvm-sh/nvm#important-notes) for GNU/Linux
-- [Windows](https://github.com/coreybutler/nvm-windows)
+- [NVM](https://github.com/nvm-sh/nvm#important-notes) for GNU/Linux.
+- [NVM](https://github.com/coreybutler/nvm-windows) for Windows.
 
 
 
