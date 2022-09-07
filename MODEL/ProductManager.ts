@@ -29,10 +29,12 @@ class ProductManager {
     } catch (e) {}
   }
 
-  public async remove(key: number) {
+  public async remove(key: string) {
     try {
       await AsyncStorage.removeItem(key.toString());
-    } catch (e) {}
+    } catch (e) {
+      return e;
+    }
   }
 
   public async removeAll() {

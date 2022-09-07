@@ -24,15 +24,6 @@ export default function ProductList({navigation}: any) {
     navigation.navigate('ProductForm', {prodData});
   };
 
-  const renderItem = ({item}: any) => (
-    <View style={styles.item}>
-      <Text style={styles.title}>{item.Name}</Text>
-      <Text style={styles.itemUpdateBtn} onPress={() => updateData(item)}>
-        Update
-      </Text>
-    </View>
-  );
-
   const loadAllData = async () => {
     let newData: Array<ProductType> = await manager.getAll();
     setDATA(newData);
@@ -42,16 +33,45 @@ export default function ProductList({navigation}: any) {
     await manager.removeAll();
   };
 
+  const removeData = async (code: string) => {
+    await manager
+      .remove(code)
+      .then(_result =>
+        manager
+          .getAll()
+          .then(products => setDATA(products))
+          .catch(error => console.log(error)),
+      )
+      .catch(error => console.log(error));
+  };
+
   useEffect(() => {
     loadAllData();
   });
+
+  const renderItem = ({item}: any) => (
+    <View style={styles.item}>
+      <Text style={styles.title}>{item.Name}</Text>
+      <View style={styles.btnsContainer}>
+        <Text style={styles.itemUpdateBtn} onPress={() => updateData(item)}>
+          Update
+        </Text>
+        <Text
+          style={styles.itemCloseBtn}
+          onPress={() => removeData(item.Code.toString())}>
+          X
+        </Text>
+      </View>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
       <FlatList
         data={DATA}
         renderItem={renderItem}
-        keyExtractor={item => item.Code.toString()}
+        // keyExtractor={item => item.Code.toString()}
+        keyExtractor={(item, index) => index.toString()}
       />
       <TouchableOpacity style={styles.button} onPress={removeAllData}>
         <Text style={styles.buttonTextBig}>Remove ALL products</Text>
