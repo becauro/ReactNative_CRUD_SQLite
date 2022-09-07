@@ -30,6 +30,7 @@ export default function ProductList({navigation}: any) {
 
   const removeAllData = async () => {
     await manager.removeAll();
+    await loadAllData();
   };
 
   const removeData = async (code: string) => {

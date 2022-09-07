@@ -1,5 +1,5 @@
 {
-  "name": "rn_101_asyncstorage",
+  "name": "reactnative_crud_asyncstorage",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -14,8 +14,7 @@
     "@react-native-masked-view/masked-view": "^0.2.7",
     "@react-navigation/native": "^6.0.12",
     "@react-navigation/stack": "^6.2.3",
-    "react": "18.0.0",
-    "react-native": "0.69.5",
+    "react-native": "^0.70.0",
     "react-native-gesture-handler": "^2.6.0",
     "react-native-reanimated": "^2.10.0",
     "react-native-safe-area-context": "^4.3.3",
