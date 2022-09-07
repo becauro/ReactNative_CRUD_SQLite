@@ -13,8 +13,16 @@ export const styles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 16,
   },
-  title: {
+  dataContainer: {
+    flexDirection: 'column',
+    backgroundColor: 'green',
+    marginVertical: 1,
+    marginHorizontal: 1,
+  },
+  dataContainerItem: {
     fontSize: 12,
+    color: 'white',
+    margin: 5,
   },
   btnsContainer: {
     flexDirection: 'row',
@@ -23,13 +31,7 @@ export const styles = StyleSheet.create({
     marginVertical: 1,
     marginHorizontal: 1,
   },
-  itemUpdateBtn: {
-    backgroundColor: 'blue',
-    color: 'red',
-    marginVertical: 8,
-    marginHorizontal: 8,
-  },
-  itemCloseBtn: {
+  btnsContainerItem: {
     backgroundColor: 'blue',
     color: 'red',
     marginVertical: 8,

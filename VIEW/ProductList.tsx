@@ -49,13 +49,21 @@ export default function ProductList({navigation}: any) {
 
     return (
       <View style={styles.item}>
-        <Text style={styles.title}>{item.Name.toString()}</Text>
+        <View style={styles.dataContainer}>
+          <Text style={styles.dataContainerItem}>{item.Code.toString()}</Text>
+          <Text style={styles.dataContainerItem}>{item.Name.toString()}</Text>
+          <Text style={styles.dataContainerItem}>
+            {item.Quantity.toString()}
+          </Text>
+        </View>
         <View style={styles.btnsContainer}>
-          <Text style={styles.itemUpdateBtn} onPress={() => updateData(item)}>
+          <Text
+            style={styles.btnsContainerItem}
+            onPress={() => updateData(item)}>
             Update
           </Text>
           <Text
-            style={styles.itemCloseBtn}
+            style={styles.btnsContainerItem}
             // onPress={async () => await removeData(item.Code.toString())}>
             onPress={() => removeData(item.Code.toString())}>
             X
