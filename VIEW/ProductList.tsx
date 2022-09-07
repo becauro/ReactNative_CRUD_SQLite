@@ -50,10 +50,14 @@ export default function ProductList({navigation}: any) {
     return (
       <View style={styles.item}>
         <View style={styles.dataContainer}>
-          <Text style={styles.dataContainerItem}>{item.Code.toString()}</Text>
-          <Text style={styles.dataContainerItem}>{item.Name.toString()}</Text>
           <Text style={styles.dataContainerItem}>
-            {item.Quantity.toString()}
+            {'Code: ' + item.Code.toString()}
+          </Text>
+          <Text style={styles.dataContainerItem}>
+            {'Name: ' + item.Name.toString()}
+          </Text>
+          <Text style={styles.dataContainerItem}>
+            {'Qty.: ' + item.Quantity.toString()}
           </Text>
         </View>
         <View style={styles.btnsContainer}>
