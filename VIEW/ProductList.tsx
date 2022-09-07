@@ -5,9 +5,8 @@ import {styles} from './CommonStyles';
 
 /*
 ToDos:
- - Add Remove (x) button in each Product
-    - After click in X button, a modal pop up to confirm
- - Show modal with Product details
+  - After click in X button, a modal pop up to confirm
+  - Show modal with Product details
 */
 
 type ProductType = {
@@ -20,13 +19,13 @@ export default function ProductList({navigation}: any) {
   const manager: ProductManager = new ProductManager();
   const [DATA, setDATA] = useState(Array<ProductType>);
 
-  const updateData = (prodData: ProductType) => {
-    navigation.navigate('ProductForm', {prodData});
-  };
-
   const loadAllData = async () => {
     let newData: Array<ProductType> = await manager.getAll();
     setDATA(newData);
+  };
+
+  const updateData = (prodData: ProductType) => {
+    navigation.navigate('ProductForm', {prodData});
   };
 
   const removeAllData = async () => {
@@ -34,48 +33,50 @@ export default function ProductList({navigation}: any) {
   };
 
   const removeData = async (code: string) => {
-    await manager
-      .remove(code)
-      .then(_result =>
-        manager
-          .getAll()
-          .then(products => setDATA(products))
-          .catch(error => console.log(error)),
-      )
-      .catch(error => console.log(error));
+    await manager.remove(code);
+    await loadAllData();
   };
 
   useEffect(() => {
+    console.log('get in useEffect 1');
+
     loadAllData();
-  });
+  }, []);
 
-  const renderItem = ({item}: any) => (
-    <View style={styles.item}>
-      <Text style={styles.title}>{item.Name}</Text>
-      <View style={styles.btnsContainer}>
-        <Text style={styles.itemUpdateBtn} onPress={() => updateData(item)}>
-          Update
-        </Text>
-        <Text
-          style={styles.itemCloseBtn}
-          onPress={() => removeData(item.Code.toString())}>
-          X
-        </Text>
+  function renderItem({item}: any) {
+    console.log('Get in renderItem');
+
+    return (
+      <View style={styles.item}>
+        <Text style={styles.title}>{item.Name.toString()}</Text>
+        <View style={styles.btnsContainer}>
+          <Text style={styles.itemUpdateBtn} onPress={() => updateData(item)}>
+            Update
+          </Text>
+          <Text
+            style={styles.itemCloseBtn}
+            // onPress={async () => await removeData(item.Code.toString())}>
+            onPress={() => removeData(item.Code.toString())}>
+            X
+          </Text>
+        </View>
       </View>
-    </View>
-  );
+    );
+  }
 
-  return (
+  return DATA.length !== 0 ? (
     <View style={styles.container}>
       <FlatList
         data={DATA}
         renderItem={renderItem}
-        // keyExtractor={item => item.Code.toString()}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={item => item.Code.toString()}
+        // keyExtractor={(item, index) => index.toString()}
       />
       <TouchableOpacity style={styles.button} onPress={removeAllData}>
         <Text style={styles.buttonTextBig}>Remove ALL products</Text>
       </TouchableOpacity>
     </View>
+  ) : (
+    <Text> Empty List </Text>
   );
 }
