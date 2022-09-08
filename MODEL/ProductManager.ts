@@ -26,10 +26,22 @@ class ProductManager {
 
   // NORMAL Methods:
 
-  public async add(product: ProductType) {
+  public async add1(product: ProductType) {
     try {
       const jsonValue = JSON.stringify(product);
       await AsyncStorage.setItem(product.Code.toString(), jsonValue);
+    } catch (e) {}
+  }
+
+  public async add(product: ProductType) {
+    try {
+      db.transaction((txn: any) =>
+        txn.executeSql(sqlInsert, [
+          product.Code,
+          product.Name,
+          product.Quantity,
+        ]),
+      );
     } catch (e) {}
   }
 
