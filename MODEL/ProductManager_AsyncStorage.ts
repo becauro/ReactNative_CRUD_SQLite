@@ -1,21 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import db from './db';
-import Product from './Product';
 
 type ProductType = {
   Code: number;
   Name: String;
   Quantity: Number;
 };
-
-const sqlCreate =
-  'CREATE TABLE IF NOT EXISTS PRODUCT(' +
-  'CODIGO INTEGER PRIMARY KEY, ' +
-  ' NAME VARCHAR(20), QUANTITY INTEGER)';
-const sqlInsert =
-  'INSERT INTO PRODUCT ( CODE, NAME, QUANTITY )' + ' VALUES (?,?,?)';
-const sqlDelete = 'DELETE FROM PRODUCT WHERE CODE=?';
-const sqlSelect = 'SELECT * FROM PRODUCT';
 
 class ProductManager {
   // HELPER Method:
@@ -63,7 +52,7 @@ class ProductManager {
     return await AsyncStorage.getItem(key.toString());
   }
 
-  public async getAll1(): Promise<Array<ProductType>> {
+  public async getAll(): Promise<Array<ProductType>> {
     try {
       let objects: Array<ProductType> = [];
 
@@ -80,31 +69,6 @@ class ProductManager {
     } catch (e) {
       return [];
     }
-  }
-
-  public async getAll(
-    useRetorno: (produtos: Array<ProductType>) => void,
-  ): Promise<Array<ProductType>> {
-    let objetos: Array<ProductType> = [];
-    db.transaction((txn: any) =>
-      txn.executeSql(sqlSelect, [], (_txn2: any, results: any) => {
-        for (let i = 0; i < results.rows.length; ++i) {
-          let linha = results.rows.item(i);
-          let produto: ProductType = new Product(
-            linha.CODE,
-            linha.NAME,
-            linha.QUANTITY,
-          );
-          objetos.push(produto);
-        }
-        useRetorno(objetos);
-        // if (objetos.length < 1) {
-        //   this.criarBanco();
-        // }
-      }),
-    );
-
-    return objetos;
   }
 }
 
