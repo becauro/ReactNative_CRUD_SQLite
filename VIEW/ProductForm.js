@@ -6,6 +6,13 @@ import {styles} from './CommonStyles';
 
 // This screen component is used for Register Mode and Update Mode
 
+/*
+ToDos:
+  - To finish the save() function
+  - After click in X button, a modal pop up to confirm
+  - Show modal with Product details
+*/
+
 export default function ProductForm({route, navigation}) {
   const manager = new ProductManager();
   const [code, setCode] = useState('');
@@ -76,17 +83,24 @@ export default function ProductForm({route, navigation}) {
 
   const save = async () => {
     try {
-      const fieldIsEmpty = checkFieldEmpty();
-      const keyExistsCode = await checkIfKeyExists();
+      // const fieldIsEmpty = checkFieldEmpty();
+      // const keyExistsCode = await checkIfKeyExists();
 
-      if (fieldIsEmpty === false && keyExistsCode === false) {
-        const prodAux = new Product(
-          parseInt(code, 10),
-          name,
-          parseInt(quantity, 10),
-        );
-        manager.add(prodAux).then(goToListScreen);
-      }
+      // if (fieldIsEmpty === false && keyExistsCode === false) {
+      //   const prodAux = new Product(
+      //     parseInt(code, 10),
+      //     name,
+      //     parseInt(quantity, 10),
+      //   );
+      //   await manager.add(prodAux).then(goToListScreen);
+      // }
+
+      const prodAux = new Product( // testando...
+        parseInt(code, 10),
+        name,
+        parseInt(quantity, 10),
+      );
+      await manager.add(prodAux).then(goToListScreen);
     } catch (error) {
       console.log(error);
     }

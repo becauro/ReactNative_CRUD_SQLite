@@ -2,6 +2,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import db from './db';
 import Product from './Product';
 
+/*
+ToDos:
+  - To finish the other class methods, passing from AsyncStorage to SQLite
+*/
+
 type ProductType = {
   Code: number;
   Name: String;
@@ -10,11 +15,11 @@ type ProductType = {
 
 const sqlCreate =
   'CREATE TABLE IF NOT EXISTS PRODUCT(' +
-  'CODIGO INTEGER PRIMARY KEY, ' +
+  'CODE INTEGER PRIMARY KEY, ' +
   ' NAME VARCHAR(20), QUANTITY INTEGER)';
 const sqlInsert =
   'INSERT INTO PRODUCT ( CODE, NAME, QUANTITY )' + ' VALUES (?,?,?)';
-const sqlDelete = 'DELETE FROM PRODUCT WHERE CODE=?';
+// const sqlDelete = 'DELETE FROM PRODUCT WHERE CODE=?';
 const sqlSelect = 'SELECT * FROM PRODUCT';
 
 class ProductManager {
@@ -24,25 +29,43 @@ class ProductManager {
     return (await AsyncStorage.getAllKeys()).some(key => key === code);
   }
 
-  // NORMAL Methods:
-
-  public async add1(product: ProductType) {
-    try {
-      const jsonValue = JSON.stringify(product);
-      await AsyncStorage.setItem(product.Code.toString(), jsonValue);
-    } catch (e) {}
+  private async criarBanco() {
+    db.transaction((txn: any) => txn.executeSql(sqlCreate, []));
   }
+
+  private ExecuteQuery = (sql: any, params: any) =>
+    new Promise((resolve, reject) => {
+      db.transaction((trans: any) => {
+        trans.executeSql(
+          sql,
+          params,
+          (_trans2: any, results: any) => {
+            resolve(results);
+          },
+
+          (error: any) => {
+            reject(error);
+          },
+        );
+      });
+    });
+
+  // NORMAL Methods:
 
   public async add(product: ProductType) {
     try {
-      db.transaction((txn: any) =>
-        txn.executeSql(sqlInsert, [
-          product.Code,
-          product.Name,
-          product.Quantity,
-        ]),
-      );
-    } catch (e) {}
+      this.criarBanco(); //
+      console.log(product);
+
+      await this.ExecuteQuery(sqlInsert, [
+        product.Code,
+        product.Name,
+        product.Quantity,
+      ]);
+    } catch (e) {
+      console.log('Add() func error: ');
+      console.log(e);
+    }
   }
 
   public async update(product: ProductType) {
@@ -75,46 +98,23 @@ class ProductManager {
     return await AsyncStorage.getItem(key.toString());
   }
 
-  public async getAll1(): Promise<Array<ProductType>> {
-    try {
-      let objects: Array<ProductType> = [];
+  public async getAll(): Promise<Array<ProductType>> {
+    this.criarBanco();
 
-      let keys = await AsyncStorage.getAllKeys();
-      let objJSON = await AsyncStorage.multiGet(keys);
+    let selectQuery: any = await this.ExecuteQuery(sqlSelect, []);
+    let objetos: Array<ProductType> = []; //
 
-      if (objJSON != null && objJSON.length > 0) {
-        objJSON.forEach((element: any) => {
-          let product: ProductType = JSON.parse(element[1]);
-          objects.push(product);
-        });
-      }
-      return objects;
-    } catch (e) {
-      return [];
+    var rows = selectQuery.rows;
+
+    for (let i = 0; i < rows.length; i++) {
+      var item = rows.item(i);
+      let produto: ProductType = new Product(
+        item.CODE,
+        item.NAME,
+        item.QUANTITY,
+      );
+      objetos.push(produto);
     }
-  }
-
-  public async getAll(
-    useRetorno: (produtos: Array<ProductType>) => void,
-  ): Promise<Array<ProductType>> {
-    let objetos: Array<ProductType> = [];
-    db.transaction((txn: any) =>
-      txn.executeSql(sqlSelect, [], (_txn2: any, results: any) => {
-        for (let i = 0; i < results.rows.length; ++i) {
-          let linha = results.rows.item(i);
-          let produto: ProductType = new Product(
-            linha.CODE,
-            linha.NAME,
-            linha.QUANTITY,
-          );
-          objetos.push(produto);
-        }
-        useRetorno(objetos);
-        // if (objetos.length < 1) {
-        //   this.criarBanco();
-        // }
-      }),
-    );
 
     return objetos;
   }

@@ -68,7 +68,6 @@ export default function ProductList({navigation}: any) {
           </Text>
           <Text
             style={styles.btnContainerItem}
-            // onPress={async () => await removeData(item.Code.toString())}>
             onPress={() => removeData(item.Code.toString())}>
             X
           </Text>
