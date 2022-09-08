@@ -45,7 +45,7 @@ export default function ProductList({navigation}: any) {
   }, []);
 
   function renderItem({item}: any) {
-    console.log('Get in renderItem');
+    // console.log('Get in renderItem');
 
     return (
       <View style={styles.item}>
