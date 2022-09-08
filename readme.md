@@ -1,4 +1,4 @@
-# AsyncStorage CRUD
+# SQLite CRUD
 
 This project was developed in React Native and designed only for studies purpose.
 Maybe it's is a work in progress.
@@ -16,7 +16,7 @@ Each products have only three data: Code, Name and Quantity.
 
 ## Data persistence
 
-The data persist through the [AsyncStorage](https://react-native-async-storage.github.io/async-storage/docs/install/) library.
+The data persist through the [SQLite](https://www.npmjs.com/package/react-native-sqlite-storage) database.
 
 
 
