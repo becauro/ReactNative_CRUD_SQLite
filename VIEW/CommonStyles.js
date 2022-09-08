@@ -31,11 +31,15 @@ export const styles = StyleSheet.create({
     marginVertical: 1,
     marginHorizontal: 1,
   },
-  btnsContainerItem: {
+  btnContainerItem: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignSelf: 'center',
+    height: '50%',
     backgroundColor: 'blue',
     color: 'red',
-    marginVertical: 8,
-    marginHorizontal: 8,
+    marginHorizontal: 10,
+    padding: 10,
   },
   inputContainer: {
     flex: 1,

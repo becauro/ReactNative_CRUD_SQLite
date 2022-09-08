@@ -62,12 +62,12 @@ export default function ProductList({navigation}: any) {
         </View>
         <View style={styles.btnsContainer}>
           <Text
-            style={styles.btnsContainerItem}
+            style={styles.btnContainerItem}
             onPress={() => updateData(item)}>
             Update
           </Text>
           <Text
-            style={styles.btnsContainerItem}
+            style={styles.btnContainerItem}
             // onPress={async () => await removeData(item.Code.toString())}>
             onPress={() => removeData(item.Code.toString())}>
             X
