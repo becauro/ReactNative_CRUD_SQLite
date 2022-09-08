@@ -1,5 +1,5 @@
 {
-  "name": "reactnative_crud_asyncstorage",
+  "name": "reactnative_crud_sqlite",
   "version": "0.0.1",
   "private": true,
   "scripts": {
