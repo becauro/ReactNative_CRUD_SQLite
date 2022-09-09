@@ -20,9 +20,10 @@ const sqlCreate =
   ' NAME VARCHAR(20), QUANTITY INTEGER)';
 const sqlInsert =
   'INSERT INTO PRODUCT ( CODE, NAME, QUANTITY )' + ' VALUES (?,?,?)';
-const sqlDeleteOne = 'DELETE FROM PRODUCT WHERE CODE=?';
 const sqlDelete = 'DELETE FROM PRODUCT';
+const sqlDeleteOne = 'DELETE FROM PRODUCT WHERE CODE=?';
 const sqlSelect = 'SELECT * FROM PRODUCT';
+const sqlSelectOne = 'SELECT * FROM PRODUCT WHERE CODE=?';
 
 class ProductManager {
   // HELPER Method:
@@ -94,7 +95,11 @@ class ProductManager {
   }
 
   public async getOne(key: number) {
-    return await AsyncStorage.getItem(key.toString());
+    try {
+      await this.ExecuteQuery(sqlSelectOne, [key]);
+    } catch (e) {
+      return e;
+    }
   }
 
   public async getAll(): Promise<Array<ProductType>> {
