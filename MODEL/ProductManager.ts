@@ -19,7 +19,7 @@ const sqlCreate =
   ' NAME VARCHAR(20), QUANTITY INTEGER)';
 const sqlInsert =
   'INSERT INTO PRODUCT ( CODE, NAME, QUANTITY )' + ' VALUES (?,?,?)';
-// const sqlDelete = 'DELETE FROM PRODUCT WHERE CODE=?';
+const sqlDeleteOne = 'DELETE FROM PRODUCT WHERE CODE=?';
 const sqlSelect = 'SELECT * FROM PRODUCT';
 
 class ProductManager {
@@ -29,7 +29,7 @@ class ProductManager {
     return (await AsyncStorage.getAllKeys()).some(key => key === code);
   }
 
-  private async criarBanco() {
+  private async createDb() {
     db.transaction((txn: any) => txn.executeSql(sqlCreate, []));
   }
 
@@ -54,7 +54,7 @@ class ProductManager {
 
   public async add(product: ProductType) {
     try {
-      this.criarBanco(); //
+      this.createDb(); //
       console.log(product);
 
       await this.ExecuteQuery(sqlInsert, [
@@ -77,7 +77,7 @@ class ProductManager {
 
   public async remove(key: string) {
     try {
-      await AsyncStorage.removeItem(key.toString());
+      await this.ExecuteQuery(sqlDeleteOne, [key]);
     } catch (e) {
       return e;
     }
@@ -99,7 +99,7 @@ class ProductManager {
   }
 
   public async getAll(): Promise<Array<ProductType>> {
-    this.criarBanco();
+    this.createDb();
 
     let selectQuery: any = await this.ExecuteQuery(sqlSelect, []);
     let objetos: Array<ProductType> = []; //
