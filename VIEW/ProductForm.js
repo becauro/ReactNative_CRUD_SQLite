@@ -109,16 +109,17 @@ export default function ProductForm({route, navigation}) {
   const update = async () => {
     try {
       const fieldIsEmpty = checkFieldEmpty();
-      const keyExistsCode = await checkIfKeyExists();
+      // const keyExistsCode = await checkIfKeyExists();
 
-      if (fieldIsEmpty === false && keyExistsCode === true) {
+      console.log('Entrou no update');
+      // if (fieldIsEmpty === false && keyExistsCode === true) {
         const prodAux = new Product(
           parseInt(code, 10),
           name,
           parseInt(quantity, 10),
         );
         await manager.update(prodAux).then(goToListScreen);
-      }
+      // }
     } catch (error) {
       console.log(error);
     }

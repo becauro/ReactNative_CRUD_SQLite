@@ -24,6 +24,7 @@ const sqlDelete = 'DELETE FROM PRODUCT';
 const sqlDeleteOne = 'DELETE FROM PRODUCT WHERE CODE=?';
 const sqlSelect = 'SELECT * FROM PRODUCT';
 const sqlSelectOne = 'SELECT * FROM PRODUCT WHERE CODE=?';
+const sqlUpdateOne = 'UPDATE PRODUCT SET NAME=?, QUANTITY=? WHERE CODE=?';
 
 class ProductManager {
   // HELPER Method:
@@ -57,13 +58,13 @@ class ProductManager {
 
   public async add(product: ProductType) {
     try {
-      this.createDb(); //
+      this.createDb(); // If add() is called, it assumed a table already exists
       console.log(product);
 
       await this.ExecuteQuery(sqlInsert, [
-        product.Code,
         product.Name,
         product.Quantity,
+        product.Code,
       ]);
     } catch (e) {
       console.log('Add() func error: ');
@@ -73,9 +74,14 @@ class ProductManager {
 
   public async update(product: ProductType) {
     try {
-      const jsonValue = JSON.stringify(product);
-      await AsyncStorage.mergeItem(product.Code.toString(), jsonValue);
-    } catch (e) {}
+      await this.ExecuteQuery(sqlUpdateOne, [
+        product.Name,
+        product.Quantity,
+        product.Code,
+      ]);
+    } catch (e) {
+      return e;
+    }
   }
 
   public async remove(key: string) {
@@ -103,6 +109,8 @@ class ProductManager {
   }
 
   public async getAll(): Promise<Array<ProductType>> {
+    this.createDb(); // If getAll() is called, it assumed a table already exists
+
     let selectQuery: any = await this.ExecuteQuery(sqlSelect, []);
     let objetos: Array<ProductType> = []; //
 
