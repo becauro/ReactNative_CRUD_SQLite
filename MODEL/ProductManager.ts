@@ -5,7 +5,8 @@ import Product from './Product';
 /*
 ToDos:
   - To finish the other class methods, passing from AsyncStorage to SQLite
-*/
+  - Become somes vars into let
+  */
 
 type ProductType = {
   Code: number;
@@ -20,6 +21,7 @@ const sqlCreate =
 const sqlInsert =
   'INSERT INTO PRODUCT ( CODE, NAME, QUANTITY )' + ' VALUES (?,?,?)';
 const sqlDeleteOne = 'DELETE FROM PRODUCT WHERE CODE=?';
+const sqlDelete = 'DELETE FROM PRODUCT';
 const sqlSelect = 'SELECT * FROM PRODUCT';
 
 class ProductManager {
@@ -85,10 +87,7 @@ class ProductManager {
 
   public async removeAll() {
     try {
-      let keys = await AsyncStorage.getAllKeys();
-      keys.forEach(async (key: string) => {
-        await AsyncStorage.removeItem(key);
-      });
+      await this.ExecuteQuery(sqlDelete, []);
     } catch (error) {
       console.log(error);
     }
@@ -99,8 +98,6 @@ class ProductManager {
   }
 
   public async getAll(): Promise<Array<ProductType>> {
-    this.createDb();
-
     let selectQuery: any = await this.ExecuteQuery(sqlSelect, []);
     let objetos: Array<ProductType> = []; //
 
