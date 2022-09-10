@@ -110,6 +110,7 @@ class ProductManager {
     try {
       await this.ExecuteQuery(sqlDelete, []);
     } catch (error) {
+      console.log('removeAll() error from ProductManager.ts :');
       console.log(error);
     }
   }
