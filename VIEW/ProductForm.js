@@ -84,10 +84,9 @@ export default function ProductForm({route, navigation}) {
   const save = async () => {
     try {
       const fieldIsEmpty = checkFieldEmpty();
-      // const keyExistsCode = await checkIfKeyExists();
+      const keyExistsCode = await checkIfKeyExists();
 
-      // if (fieldIsEmpty === false && keyExistsCode === false) {
-      if (fieldIsEmpty === false) {
+      if (fieldIsEmpty === false && keyExistsCode === false) {
         const prodAux = new Product(
           parseInt(code, 10),
           name,
