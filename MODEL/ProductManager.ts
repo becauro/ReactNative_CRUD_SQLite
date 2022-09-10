@@ -79,9 +79,9 @@ class ProductManager {
         product.Name,
         product.Quantity,
       ]);
-    } catch (e) {
-      console.log('Add() func error: ');
-      console.log(e);
+    } catch (error) {
+      console.log('Add() error from ProductManager.ts :');
+      console.log(error);
     }
   }
 
