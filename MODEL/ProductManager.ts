@@ -101,8 +101,9 @@ class ProductManager {
   public async remove(key: string) {
     try {
       await this.ExecuteQuery(sqlDeleteOne, [key]);
-    } catch (e) {
-      return e;
+    } catch (error) {
+      console.log('remove() error from ProductManager.ts :');
+      console.log(error);
     }
   }
 
