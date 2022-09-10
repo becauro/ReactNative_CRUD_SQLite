@@ -71,7 +71,7 @@ class ProductManager {
 
   public async add(product: ProductType) {
     try {
-      this.createDb(); // If add() is called, it assumed a table already exists
+      this.createDb(); // If add() is called, it's assumed a table already exists
       console.log(product);
 
       await this.ExecuteQuery(sqlInsert, [
@@ -126,15 +126,10 @@ class ProductManager {
   }
 
   public async getAll(): Promise<Array<ProductType>> {
-    this.createDb(); // If getAll() is called, it assumed a table already exists
+    this.createDb(); // If getAll() is called, it's assumed a table already exists
 
     let selectQuery: any = await this.ExecuteQuery(sqlSelect, []);
-    let objetos: Array<ProductType> = []; //
-
-    // Debug:
-
-    console.log('Query result in Productmanager getAll():');
-    console.log(selectQuery);
+    let objetos: Array<ProductType> = [];
     var rows = selectQuery.rows;
 
     for (let i = 0; i < rows.length; i++) {
