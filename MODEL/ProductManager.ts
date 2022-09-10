@@ -35,9 +35,9 @@ class ProductManager {
         return false;
       }
       return true;
-    } catch (e) {
-      console.log('checkIfKeyExists() func error: ');
-      return e;
+    } catch (error) {
+      console.log('checkIfKeyExists() error from ProductManager.ts :');
+      console.log(error);
     }
   }
 
