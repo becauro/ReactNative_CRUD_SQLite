@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import db from './db';
 import Product from './Product';
 
@@ -22,7 +21,7 @@ const sqlInsert =
   'INSERT INTO PRODUCT ( CODE, NAME, QUANTITY )' + ' VALUES (?,?,?)';
 const sqlDelete = 'DELETE FROM PRODUCT';
 const sqlDeleteOne = 'DELETE FROM PRODUCT WHERE CODE=?';
-const sqlSelect = 'SELECT * FROM PRODUCT'; //
+const sqlSelect = 'SELECT * FROM PRODUCT';
 const sqlSelectOne = 'SELECT * FROM PRODUCT WHERE CODE=?';
 const sqlUpdateOne = 'UPDATE PRODUCT SET NAME=?, QUANTITY=? WHERE CODE=?';
 
@@ -43,7 +42,12 @@ class ProductManager {
   }
 
   private async createDb() {
-    db.transaction((txn: any) => txn.executeSql(sqlCreate, []));
+    try {
+      db.transaction((txn: any) => txn.executeSql(sqlCreate, []));
+    } catch (error) {
+      console.log('createDb() error from ProductManager.ts :');
+      console.log(error);
+    }
   }
 
   private ExecuteQuery = (sql: any, params: any) =>

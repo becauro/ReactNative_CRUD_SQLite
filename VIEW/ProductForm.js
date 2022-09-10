@@ -8,7 +8,8 @@ import {styles} from './CommonStyles';
 
 /*
 ToDos:
-  - To finish the save() function
+  - Implements a "search" feature by using getOne().
+        NOTE: getOne is already doen in Productmanager file.
   - After click in X button, a modal pop up to confirm
   - Show modal with Product details
 */
