@@ -22,7 +22,7 @@ const sqlInsert =
   'INSERT INTO PRODUCT ( CODE, NAME, QUANTITY )' + ' VALUES (?,?,?)';
 const sqlDelete = 'DELETE FROM PRODUCT';
 const sqlDeleteOne = 'DELETE FROM PRODUCT WHERE CODE=?';
-const sqlSelect = 'SELECT * FROM PRODUCT';
+const sqlSelect = 'SELECT * FROM PRODUCT'; //
 const sqlSelectOne = 'SELECT * FROM PRODUCT WHERE CODE=?';
 const sqlUpdateOne = 'UPDATE PRODUCT SET NAME=?, QUANTITY=? WHERE CODE=?';
 
@@ -30,7 +30,16 @@ class ProductManager {
   // HELPER Method:
 
   public async checkIfKeyExists(code: string) {
-    return (await AsyncStorage.getAllKeys()).some(key => key === code);
+    try {
+      let result: any = await this.ExecuteQuery(sqlSelectOne, [code]);
+      if (result.rows.length === 0) {
+        return false;
+      }
+      return true;
+    } catch (e) {
+      console.log('checkIfKeyExists() func error: ');
+      return e;
+    }
   }
 
   private async createDb() {
@@ -115,6 +124,10 @@ class ProductManager {
     let selectQuery: any = await this.ExecuteQuery(sqlSelect, []);
     let objetos: Array<ProductType> = []; //
 
+    // Debug:
+
+    console.log('Query result in Productmanager getAll():');
+    console.log(selectQuery);
     var rows = selectQuery.rows;
 
     for (let i = 0; i < rows.length; i++) {
