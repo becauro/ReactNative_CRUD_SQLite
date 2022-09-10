@@ -105,15 +105,15 @@ export default function ProductForm({route, navigation}) {
       const fieldIsEmpty = checkFieldEmpty();
       // const keyExistsCode = await checkIfKeyExists();
 
-      console.log('Entrou no update');
       // if (fieldIsEmpty === false && keyExistsCode === true) {
+      if (fieldIsEmpty === false) {
         const prodAux = new Product(
           parseInt(code, 10),
           name,
           parseInt(quantity, 10),
         );
         await manager.update(prodAux).then(goToListScreen);
-      // }
+      }
     } catch (error) {
       console.log(error);
     }

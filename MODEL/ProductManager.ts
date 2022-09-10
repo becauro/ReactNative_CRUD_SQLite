@@ -80,6 +80,7 @@ class ProductManager {
         product.Code,
       ]);
     } catch (e) {
+      console.log('Update() func error: ');
       return e;
     }
   }
