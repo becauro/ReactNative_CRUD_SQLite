@@ -126,22 +126,26 @@ class ProductManager {
   }
 
   public async getAll(): Promise<Array<ProductType>> {
-    this.createDb(); // If getAll() is called, it's assumed a table already exists
-
-    let selectQuery: any = await this.ExecuteQuery(sqlSelect, []);
     let objetos: Array<ProductType> = [];
-    var rows = selectQuery.rows;
+    try {
+      this.createDb(); // If getAll() is called, it's assumed a table already exists
 
-    for (let i = 0; i < rows.length; i++) {
-      var item = rows.item(i);
-      let produto: ProductType = new Product(
-        item.CODE,
-        item.NAME,
-        item.QUANTITY,
-      );
-      objetos.push(produto);
+      let selectQuery: any = await this.ExecuteQuery(sqlSelect, []);
+      var rows = selectQuery.rows;
+
+      for (let i = 0; i < rows.length; i++) {
+        var item = rows.item(i);
+        let produto: ProductType = new Product(
+          item.CODE,
+          item.NAME,
+          item.QUANTITY,
+        );
+        objetos.push(produto);
+      }
+    } catch (error) {
+      console.log('gelAll() error from ProductManager.ts :');
+      console.log(error);
     }
-
     return objetos;
   }
 }
