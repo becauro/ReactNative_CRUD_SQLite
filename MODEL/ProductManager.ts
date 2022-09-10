@@ -119,8 +119,9 @@ class ProductManager {
   public async getOne(key: number) {
     try {
       await this.ExecuteQuery(sqlSelectOne, [key]);
-    } catch (e) {
-      return e;
+    } catch (error) {
+      console.log('getOne() error from ProductManager.ts :');
+      console.log(error);
     }
   }
 
