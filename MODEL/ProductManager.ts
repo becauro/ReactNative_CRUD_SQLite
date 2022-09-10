@@ -62,9 +62,9 @@ class ProductManager {
       console.log(product);
 
       await this.ExecuteQuery(sqlInsert, [
+        product.Code,
         product.Name,
         product.Quantity,
-        product.Code,
       ]);
     } catch (e) {
       console.log('Add() func error: ');

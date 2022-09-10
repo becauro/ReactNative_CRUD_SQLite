@@ -83,24 +83,18 @@ export default function ProductForm({route, navigation}) {
 
   const save = async () => {
     try {
-      // const fieldIsEmpty = checkFieldEmpty();
+      const fieldIsEmpty = checkFieldEmpty();
       // const keyExistsCode = await checkIfKeyExists();
 
       // if (fieldIsEmpty === false && keyExistsCode === false) {
-      //   const prodAux = new Product(
-      //     parseInt(code, 10),
-      //     name,
-      //     parseInt(quantity, 10),
-      //   );
-      //   await manager.add(prodAux).then(goToListScreen);
-      // }
-
-      const prodAux = new Product( // testando...
-        parseInt(code, 10),
-        name,
-        parseInt(quantity, 10),
-      );
-      await manager.add(prodAux).then(goToListScreen);
+      if (fieldIsEmpty === false) {
+        const prodAux = new Product(
+          parseInt(code, 10),
+          name,
+          parseInt(quantity, 10),
+        );
+        await manager.add(prodAux).then(goToListScreen);
+      }
     } catch (error) {
       console.log(error);
     }
