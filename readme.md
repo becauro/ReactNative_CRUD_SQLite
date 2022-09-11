@@ -9,7 +9,7 @@ For now this app works only in Android platform. I've not set anything for iOS y
 ## Description
 
 As the title suggest, there is only the CRUD features in this app.
-I tried developing a simple Product Registration app, just for practicing basic concepts in React Native.
+I tried developing a simple **Product Registration** app, just for practicing basic concepts in React Native.
 
 Each products have only three data: Code, Name and Quantity.
 
@@ -18,6 +18,12 @@ Each products have only three data: Code, Name and Quantity.
 
 The data persist through the [SQLite](https://www.npmjs.com/package/react-native-sqlite-storage) database.
 
+### Other versions of the project
+
+I built this same project under different types of Data Persistence:
+
+- [AsyncStorage version](https://github.com/becauro/ReactNative_CRUD_AsyncStorage)
+- Realm version (coming...) 
 
 
 ## Screens
