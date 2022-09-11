@@ -131,10 +131,10 @@ class ProductManager {
       this.createDb(); // If getAll() is called, it's assumed a table already exists
 
       let selectQuery: any = await this.ExecuteQuery(sqlSelect, []);
-      var rows = selectQuery.rows;
+      let rows = selectQuery.rows; // former var
 
       for (let i = 0; i < rows.length; i++) {
-        var item = rows.item(i);
+        let item = rows.item(i); // former var
         let produto: ProductType = new Product(
           item.CODE,
           item.NAME,
