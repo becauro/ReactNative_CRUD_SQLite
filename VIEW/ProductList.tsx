@@ -39,7 +39,7 @@ export default function ProductList({navigation}: any) {
   };
 
   useEffect(() => {
-    console.log('get in useEffect 1');
+    // console.log('get in useEffect 1');
 
     loadAllData();
   }, []);

@@ -126,7 +126,7 @@ class ProductManager {
   }
 
   public async getAll(): Promise<Array<ProductType>> {
-    let objetos: Array<ProductType> = [];
+    let objects: Array<ProductType> = [];
     try {
       this.createDb(); // If getAll() is called, it's assumed a table already exists
 
@@ -140,13 +140,13 @@ class ProductManager {
           item.NAME,
           item.QUANTITY,
         );
-        objetos.push(produto);
+        objects.push(produto);
       }
     } catch (error) {
       console.log('gelAll() error from ProductManager.ts :');
       console.log(error);
     }
-    return objetos;
+    return objects;
   }
 }
 
